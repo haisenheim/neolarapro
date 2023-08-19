@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,19 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/hello',function(){
+    return response()->json("Bonjour tout le monde");
+});
+
+Route::get('/jobs',function(){
+    $jobs = Post::all();
+    return response()->json($jobs);
+});
+
+Route::post('/job',function(){
+    $data = request()->all();
+    dd($data);
+});
+
+Route::get('/staff','App\http\Controllers\Api\HelloController@getEmployees');

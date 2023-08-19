@@ -10,4 +10,8 @@ class Employee extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function secteur(){
+        return $this->belongsTo('App\Models\Secteur','secteur_id');
+    }
 }
