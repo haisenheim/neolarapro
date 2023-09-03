@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HelloController;
+use App\Mail\ContactMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +21,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function (Request $request) {
     //dd($request);
     return view('welcome');
+});
+
+Route::get('/testmail',function(){
+    $data= [
+        'titre'=>'Hello EAD',
+        'message'=>'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed nisi explicabo, sunt blanditiis perferendis facere doloribus cupiditate distinctio quia assumenda molestias ex velit eveniet laboriosam voluptatem qui dolorum. Amet, consectetur.'
+    ];
+    Mail::to('clementessomba@alliages-tech.com')
+    ->send(new ContactMail($data));
+    return back();
 });
 
 Route::get('/hello',[HelloController::class,'index']);
